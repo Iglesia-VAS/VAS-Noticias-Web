@@ -6,6 +6,9 @@ node_modules
 /.svelte-kit
 /build
 
+# Netlify generated files
+/.netlify/
+
 # OS
 .DS_Store
 Thumbs.db
