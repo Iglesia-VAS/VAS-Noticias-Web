@@ -8,6 +8,7 @@
 	import appService from '$lib/appService';
 	import type { Announcement } from '$lib/appTypes';
 	import AnimateToCenterComponent from '$lib/components/AnimateToCenterComponent.svelte';
+	import ImageComponent from '$lib/components/ImageComponent.svelte';
 	import NoContentPlaceholderComponent from '$lib/components/NoContentPlaceholderComponent.svelte';
 	import { openSocialMediaModal } from '$lib/components/modal';
 	import { showToast } from '$lib/components/toast';
@@ -78,8 +79,8 @@
 							class="announcement"
 							class:selected={announcement.isSelected}
 						>
-							<img
-								src={announcement.imageLink}
+							<ImageComponent
+								mediaImage={announcement.mediaImage}
 								alt="Anuncio"
 							/>
 							<div class="description-container">
@@ -143,7 +144,7 @@
 		/>
 		<meta
 			property="og:image"
-			content={selectedAnnouncement.imageLink}
+			content={selectedAnnouncement.mediaImage.url}
 		/>
 		<meta
 			property="og:url"
@@ -181,7 +182,7 @@
 	}
 
 	.announcement {
-		img {
+		:global(img) {
 			width: 100%;
 			aspect-ratio: 1;
 		}
@@ -217,7 +218,7 @@
 			border-bottom-left-radius: 4px;
 			border-bottom-right-radius: 4px;
 
-			img {
+			:global(img) {
 				width: 1.5rem;
 				margin: -4px -2px -2px 0px;
 			}

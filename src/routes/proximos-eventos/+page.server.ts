@@ -1,5 +1,5 @@
 import appService from '$lib/appService';
-import type { Event } from '$lib/appTypes';
+import type { Event, MediaImage } from '$lib/appTypes';
 import payloadApi from '$lib/payloadApi';
 import { AxiosError } from 'axios';
 import type { PageServerLoad } from './$types';
@@ -8,10 +8,7 @@ type UpcomingEventDTO = {
 	id: string;
 	title: string;
 	slug: string;
-	image: {
-		url: string;
-		thumbnailURL: string;
-	};
+	image: MediaImage;
 	description: string;
 	isActive: boolean;
 	dateStrings: string[];
@@ -34,7 +31,7 @@ export const load: PageServerLoad = async ({ url }) => {
 	rawEvents = upcomingEventsResponse.data.map((event, index) => ({
 		index,
 		slug: event.slug,
-		imageLink: event.image.url,
+		mediaImage: event.image,
 		dateStrings: event.dateStrings,
 		description: event.description,
 	}));

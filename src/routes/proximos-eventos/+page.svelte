@@ -2,6 +2,7 @@
 	import { ABBREVIATED_MONTHS, ABBREVIATED_WEEK_DAYS, MONTH_NAMES } from '$lib/appConstants';
 	import appService from '$lib/appService';
 	import type { CalendarDate, Event } from '$lib/appTypes';
+	import ImageComponent from '$lib/components/ImageComponent.svelte';
 	import NoContentPlaceholderComponent from '$lib/components/NoContentPlaceholderComponent.svelte';
 	import { openSocialMediaModal } from '$lib/components/modal';
 	import { showToast } from '$lib/components/toast';
@@ -194,7 +195,8 @@
 											<button
 												class="event"
 												class:selected={event.index === selectedEvent.index}
-												style="background-image: url('{event.imageLink}');"
+												style="background-image: url('{event.mediaImage
+													.sizes.placeholder.url}');"
 												on:click={() =>
 													upcomingEventsSwiper.slideTo(
 														event.index,
@@ -268,9 +270,8 @@
 
 							<!-- The back side is the event image. The card starts flipped. -->
 							<div class="back side">
-								<img
-									class="event-image"
-									src={event.imageLink}
+								<ImageComponent
+									mediaImage={event.mediaImage}
 									alt="Evento"
 								/>
 								<div
@@ -327,7 +328,7 @@
 		/>
 		<meta
 			property="og:image"
-			content={selectedEvent.imageLink}
+			content={selectedEvent.mediaImage.url}
 		/>
 		<meta
 			property="og:url"
@@ -548,7 +549,7 @@
 			display: block;
 		}
 
-		.footer img {
+		.footer :global(img) {
 			width: 1.5rem;
 			margin: -4px -2px -2px 0px;
 		}

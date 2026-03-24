@@ -6,11 +6,28 @@ export const AppURL = {
 	CALENDARIO: '/calendario',
 } as const;
 
+export type ImageVariant = {
+	url: string;
+	mimeType: string;
+};
+
+export type MediaImage = {
+	url: string;
+	mimeType: string;
+	sizes: {
+		placeholder: ImageVariant;
+		thumbnail: ImageVariant;
+		'1x': ImageVariant;
+		'2x': ImageVariant;
+		'3x': ImageVariant;
+	};
+};
+
 // Type for the Events in the Events Swiper
 export type Event = {
 	index: number;
 	slug: string;
-	imageLink: string;
+	mediaImage: MediaImage;
 	dateStrings: string[];
 	calendarDates?: CalendarDate[];
 	description: string;
@@ -32,7 +49,7 @@ export type Week = CalendarDate[];
 export type Announcement = {
 	index: number;
 	slug: string;
-	imageLink: string;
+	mediaImage: MediaImage;
 	description: string;
 	isSelected?: boolean;
 };

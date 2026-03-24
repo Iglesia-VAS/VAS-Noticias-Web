@@ -1,4 +1,4 @@
-import type { Announcement } from '$lib/appTypes';
+import type { Announcement, MediaImage } from '$lib/appTypes';
 import payloadApi from '$lib/payloadApi';
 import { AxiosError } from 'axios';
 import type { PageServerLoad } from './$types';
@@ -7,10 +7,7 @@ type AnnouncementDTO = {
 	id: string;
 	title: string;
 	slug: string;
-	image: {
-		url: string;
-		thumbnailURL: string;
-	};
+	image: MediaImage;
 	description: string;
 	isActive: boolean;
 	updatedAt: string;
@@ -31,7 +28,7 @@ export const load: PageServerLoad = async ({ url }) => {
 	announcementList = announcementsResponse.data.map((announcement, index) => ({
 		index,
 		slug: announcement.slug,
-		imageLink: announcement.image.url,
+		mediaImage: announcement.image,
 		description: announcement.description,
 	}));
 
